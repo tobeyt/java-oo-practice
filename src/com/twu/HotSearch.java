@@ -32,7 +32,11 @@ public class HotSearch {
     public void votedToHotSearch(String name, int votedCount) {
         hotSearchList.forEach(cur -> {
             if (cur.getName().equals(name)) {
-                cur.setVotes(votedCount);
+                if (cur.isSuperHotSearch()) {
+                    cur.setVotes(votedCount * 2);
+                } else {
+                    cur.setVotes(votedCount);
+                }
             }
         });
     }

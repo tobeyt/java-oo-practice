@@ -18,7 +18,6 @@ public class Main {
                         System.out.println("请输入您的昵称");
                         String userName = getInput();
                         User user = new User(userName);
-                        label2:
                         while (true) {
                             Menu.userMenu(userName);
                             int userInput = Integer.parseInt(getInput());
@@ -37,7 +36,7 @@ public class Main {
                                         hotSearchList.votedToHotSearch(hotSearchName, hotSearchCount);
                                         System.out.println("投票成功");
                                     }
-                                    continue label2;
+                                    break;
                                 case 3:
                                     //todo:购买热搜
                                     break;
@@ -47,10 +46,9 @@ public class Main {
                                     HotItem item = new HotItem(name);
                                     hotSearchList.addHotSearch(item);
                                     System.out.println("添加成功");
-                                    Menu.userMenu(userName);
                                     break;
                                 case 5:
-                                    // TODO: 2020/7/19 退出
+                                    // 1TODO: 2020/7/19 退出
                                     continue label1;
                                 default:
                                     System.out.println("输入有误");
@@ -58,9 +56,50 @@ public class Main {
                         }
                         // 管理员
                     case 2:
-                        System.out.println("2");
-                        break;
-                    // 退出
+                        System.out.println("请输入您的昵称：");
+                        String adminName = getInput();
+                        // TODO: 2020/7/20 校验
+                        if (!adminName.equals("admin")) {
+                            System.out.println("昵称错误。");
+                        }
+                        System.out.println("请输入您的密码：");
+                        String password = getInput();
+                        if (!password.equals("admin123")) {
+                            System.out.println("密码错误。");
+                        }
+
+                        while (true) {
+                            Menu.adminMenu(adminName);
+                            int adminInput = Integer.parseInt(getInput());
+                            switch (adminInput) {
+                                case 1:
+                                    // 1TODO: 2020/7/20 查看热搜排行榜
+                                    hotSearchList.getHotSearchRank();
+                                    break;
+                                case 2:
+                                    // 1TODO: 2020/7/20 添加热搜
+                                    System.out.println("请输入你要添加的热搜事件的名字：");
+                                    String name = getInput();
+                                    HotItem item = new HotItem(name);
+                                    hotSearchList.addHotSearch(item);
+                                    System.out.println("添加成功");
+                                    break;
+                                case 3:
+                                    // 1TODO: 2020/7/20 添加超级热搜
+                                    System.out.println("请输入你要添加的超级热搜事件的名字：");
+                                    String superHotSearchName = getInput();
+                                    HotItem superHotSearchItem = new HotItem(superHotSearchName);
+                                    superHotSearchItem.setSuperHotSearch(true);
+                                    hotSearchList.addHotSearch(superHotSearchItem);
+                                    break;
+                                case 4:
+                                    // 1TODO: 2020/7/20 退出 返回上一个菜单
+                                    continue label1;
+                                default:
+                                    System.out.println("输入错误，请重新输入。");
+                            }
+                        }
+                        // 退出
                     case 3:
                         System.exit(0);
                     default:

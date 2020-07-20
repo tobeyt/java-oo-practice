@@ -39,6 +39,18 @@ public class Main {
                                     break;
                                 case 3:
                                     //todo:购买热搜
+                                    System.out.println("请输入你要购买的热搜名称：");
+                                    String buySearchName = getInput();
+                                    System.out.println("请输入你要购买的热搜排名：");
+                                    int hotSearchRank = Integer.parseInt(getInput());
+                                    System.out.println("请输入你要购买的热搜金额：");
+                                    double paidPrice = Double.parseDouble(getInput());
+                                    if (paidPrice <= hotSearchList.getHotSearchPrice(buySearchName)) {
+                                        System.out.println("购买失败");
+                                        break;
+                                    }
+                                    hotSearchList.successPaidHotSearch(buySearchName, paidPrice, hotSearchRank);
+                                    System.out.println("购买成功");
                                     break;
                                 case 4:
                                     System.out.println("请输入你要添加的热搜事件的名字：");
@@ -61,11 +73,13 @@ public class Main {
                         // TODO: 2020/7/20 校验
                         if (!adminName.equals("admin")) {
                             System.out.println("昵称错误。");
+                            break;
                         }
                         System.out.println("请输入您的密码：");
                         String password = getInput();
                         if (!password.equals("admin123")) {
                             System.out.println("密码错误。");
+                            break;
                         }
 
                         while (true) {

@@ -15,7 +15,8 @@ public class Menu {
         System.out.println("4.退出");
     }
 
-    public static void userMenu(){
+    public static void userMenu(String username){
+        System.out.println("你好，" + username + "，你可以：");
         System.out.println("1.查看热搜排行榜");
         System.out.println("2.给热搜事件投票");
         System.out.println("3.购买热搜");
